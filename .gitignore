@@ -1,0 +1,12 @@
+# Dataset images
+data/train_data/
+data/test_data_v2/
+
+# Trained models
+data/models/*.keras
+data/models/*.h5
+
+# Python cache
+__pycache__/
+.ipynb_checkpoints/
+.venv/
