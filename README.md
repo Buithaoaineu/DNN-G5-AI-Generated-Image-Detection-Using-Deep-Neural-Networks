@@ -151,6 +151,34 @@ After the team has finalized the dependencies, run:
 pip install -r requirements.txt
 ```
 
+### Dataset Setup
+
+The dataset used in this project is available from the Kaggle competition:
+
+[AI vs. Human-Generated Images](https://www.kaggle.com/datasets/97c52dbae208af8189b94d549ab0f2dfd90c3f5b14700d8506ba358d1a2d5c6f/data)
+
+#### Steps to download the dataset
+
+1. Log in to Kaggle and open the competition Data page.
+2. Download the dataset files and extract them.
+3. Place the files in the `data/` directory using the following structure:
+
+```text
+data/
+├── train.csv
+├── test.csv
+├── train_data/
+└── test_data_v2/
+```
+
+4. Keep the original image filenames so that they match the metadata.
+5. Install the required Python packages using:
+
+```bash
+pip install -r requirements.txt
+```
+
+**Note:** The image folders are not included in this GitHub repository because of their size. Download the dataset from Kaggle before running the notebooks.
 ## 8. Team Members
 
 | Member | Name | Responsibilities |
