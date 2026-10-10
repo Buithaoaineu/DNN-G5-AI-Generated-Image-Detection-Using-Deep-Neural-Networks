@@ -15,12 +15,13 @@ The main objectives are:
 -
 
 ## 3. Dataset
+## 3. Dataset
 
-- **Dataset name:** [To be determined]
-- **Dataset source:** [Insert dataset URL]
-- **Task type:** Image Classification
-- **Classes:** [Insert class names]
-- **Number of images:** [Insert dataset size]
+- **Dataset name:** AI-Generated Image Detection Dataset
+- **Dataset source:** [Kaggle Dataset](https://www.kaggle.com/datasets/97c52dbae208af8189b94d549ab0f2dfd90c3f5b14700d8506ba358d1a2d5c6f/data)
+- **Task type:** Binary Image Classification
+- **Classes:** Human-generated images and AI-generated images
+- **Number of images:** 85,490 images
 
 The dataset will be divided into training, validation, and test sets. Data preprocessing will be applied to prepare the images for model training and evaluation.
 
