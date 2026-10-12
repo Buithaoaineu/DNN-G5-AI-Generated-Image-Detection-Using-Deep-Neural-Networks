@@ -8,13 +8,9 @@ The project focuses on preprocessing image data, designing CNN architectures, ap
 
 ## 2. Project Objectives
 
-The main objectives are:
+Our group researches building CNN models such as simple CNN, complex CNN, and transfer learning (fine-tune) to classify real images and AI-generated images. These models will learn image features from the training data to classify images into two groups: Real images and AI-generated images.
 
--
--
--
 
-## 3. Dataset
 ## 3. Dataset
 
 - **Dataset name:** AI-Generated Image Detection Dataset
@@ -22,8 +18,32 @@ The main objectives are:
 - **Task type:** Binary Image Classification
 - **Classes:** Human-generated images and AI-generated images
 - **Number of images:** 85,490 images
+### Dataset layout
 
-The dataset will be divided into training, validation, and test sets. Data preprocessing will be applied to prepare the images for model training and evaluation.
+After downloading and extracting the dataset, the expected layout is:
+
+```text
+data/
+├── train.csv
+├── test.csv
+├── train_data/
+└── test_data_v2/
+```
+
+`train.csv` contains training metadata and labels. `test.csv` is used for the supplied test data and may not contain labels. The project also creates internal train, validation, and test splits from the labeled training data.
+
+### Internal data split
+
+The current experiment uses a balanced subset of 10,000 labeled images: 5,000 images per class, split as follows:
+
+| Split | Images | Percentage |
+|---|---:|---:|
+| Training | 7,000 | 70% |
+| Validation | 1,500 | 15% |
+| Internal test | 1,500 | 15% |
+| **Total** | **10,000** | **100%** |
+
+These counts assume that at least 5,000 valid images are available for each class after cleaning and checking file paths. Update this section if the final dataset or split changes.
 
 > Note: The dataset details and task configuration will be updated after the dataset selection is finalized.
 
@@ -47,7 +67,7 @@ This model will serve as a baseline for evaluating the selected image task.
 
 ### 4.3 Complex CNN
 
-A more complex CNN architecture will be designed using multiple CNN blocks, convolutional layers, pooling layers, and fully connected layers.
+The complex model uses 4 residual blocks with shortcut connections, convolutional layers, batch normalization, global average pooling, and a binary classification output. The current implementation expects input images of shape `160 × 160 × 3`.
 
 Its performance will be compared with the simple CNN model.
 
@@ -109,11 +129,12 @@ The structure may be adjusted as the project develops.
 The project is expected to use the following tools and technologies:
 
 - **Programming language:** Python
-- **Deep Learning:** TensorFlow or PyTorch
+- **Deep Learning:** TensorFlow 
 - **Data processing:** NumPy, Pandas
 - **Image processing:** 
 - **Visualization:** Matplotlib, Seaborn
 - **Version control:** Git and GitHub
+- **Development:** Jupyter Notebook, Visual Studio Code
 
 The final technology stack will be confirmed by the team.
 
@@ -141,7 +162,7 @@ python -m venv .venv
 Activate it on Windows:
 
 ```bash
-.venv\Scripts\activate
+.venv\Scripts\activate.ps1
 ```
 
 ### Install Dependencies
@@ -149,6 +170,7 @@ Activate it on Windows:
 After the team has finalized the dependencies, run:
 
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -180,6 +202,15 @@ pip install -r requirements.txt
 ```
 
 **Note:** The image folders are not included in this GitHub repository because of their size. Download the dataset from Kaggle before running the notebooks.
+
+### Run prediction
+
+Make sure the virtual environment is activated and the trained model
+`src/models/complex_cnn.keras` and test data are available. From the repository root, run:
+
+```bash
+python -m src.predict
+
 ## 8. Team Members
 
 | Member | Name | Responsibilities |
@@ -191,10 +222,15 @@ pip install -r requirements.txt
 
 ## 9. Expected Deliverables
 
--
--
--
+ Reproducible data preprocessing and train/validation/test split.
+- Implementations of Simple CNN, Complex CNN, and a transfer-learning model.
+- Model evaluation metrics and visualizations.
+- A saved trained model and a prediction script.
+- A final report comparing model performance and discussing limitations.
+
+Update this list to reflect the models and experiments actually completed by the team.
 
 ## 10. Project Status
 
-The project is currently in the setup and planning stage. Dataset details, model implementations, experimental results, and final conclusions will be added as development progresses.
+
+The project is under development. The data preparation and custom CNN workflow are being implemented. Model comparisons, transfer-learning experiments, final metrics, and conclusions should be added after the corresponding experiments have been completed.

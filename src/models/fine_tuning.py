@@ -8,7 +8,7 @@ def build_model():
 
     base_network = tf.keras.applications.MobileNet(
         input_shape=(224, 224, 3),
-        include_top=False,
+        include_top=False, #Chỉ cần dùng phần Backbone, bỏ đi phần Classification head
         weights="imagenet",
         name="mobilenet_backbone",
     )
@@ -21,36 +21,32 @@ def build_model():
 
     model = models.Model(inputs, outputs, name="Fine_Tuning_MobileNet")
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4),
+        optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
         loss="binary_crossentropy",
         metrics=["accuracy", tf.keras.metrics.AUC(name="auc")],
     )
     return model
 
 
-def fine_tune_model(model, unfreeze_from="conv_pw_13_relu", learning_rate=1e-5):
-    """Unfreeze one block of the pretrained MobileNet backbone for fine-tuning."""
-    if not isinstance(model, tf.keras.Model):
-        raise TypeError("model must be a tf.keras.Model instance.")
-
+def fine_tune_model(model, unfreeze_from="conv_pw_13_relu", learning_rate=0.00001): #lr của đoạn này nhỏ hơn đoạn trên 10 lần vì cập nhật mạnh quá thì có thể bị phá vỡ kiến thức mô hình đã học
+    """Mở khóa 1 block hoặc mở một phần backbone của MobileNet để nó cập nhật trọng số cho phù hợp hơn"""
     backbone = model.get_layer("mobilenet_backbone")
-    if backbone is None:
-        raise ValueError("The model must contain a layer named 'mobilenet_backbone'.")
 
-    for layer in backbone.layers:
+    for layer in backbone.layers: #Đoạn này là khóa toàn bộ trước đã
         layer.trainable = False
 
-    should_unfreeze = False
+    should_unfreeze = False #Mở từ layer được chọn tính về sau ấy
     for layer in backbone.layers:
         if layer.name == unfreeze_from:
             should_unfreeze = True
         if should_unfreeze:
             layer.trainable = True
 
-    if not any(layer.trainable for layer in backbone.layers):
+    if not should_unfreeze : #Trường hợp không tìm thấy thì mở 20 layer cuối
         for layer in backbone.layers[-20:]:
             layer.trainable = True
-
+            
+#Biên dịch lại model với learning rate nhỏ
     model.compile(
         optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
         loss="binary_crossentropy",
