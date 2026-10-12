@@ -3,7 +3,7 @@ import tensorflow as tf
 from data.preprocess import preprocess_image
 
 #model complex_cnn
-model = tf.keras.models.load_model("../models/complex_cnn.keras")
+model = tf.keras.models.load_model("src/models/complex_cnn.keras")
 df = pd.read_csv("../data/test_split.csv")
 
 image = preprocess_image("../data/" + df.iloc[0]["file_name"])[None, ...]
