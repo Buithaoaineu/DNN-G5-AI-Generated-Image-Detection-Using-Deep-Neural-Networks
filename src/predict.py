@@ -1,12 +1,15 @@
 import pandas as pd
 import tensorflow as tf
-from data.preprocess import preprocess_image
+from src.data.preprocess import preprocess_image
 
-#model complex_cnn
+# Tải model đã huấn luyện
 model = tf.keras.models.load_model("src/models/complex_cnn.keras")
-df = pd.read_csv("../data/test_split.csv")
 
-image = preprocess_image("../data/" + df.iloc[0]["file_name"])[None, ...]
+# Đọc dữ liệu test
+df = pd.read_csv("data/test_split.csv")
+
+# Tiền xử lý ảnh và dự đoán
+image = preprocess_image("data/" + df.iloc[0]["file_name"])[None, ...]
 prob = model.predict(image, verbose=0)[0, 0]
 
 print("Xác suất ảnh AI gen:", round(float(prob), 4))
