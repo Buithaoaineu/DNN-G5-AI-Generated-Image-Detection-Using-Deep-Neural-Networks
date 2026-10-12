@@ -8,11 +8,8 @@ The project focuses on preprocessing image data, designing CNN architectures, ap
 
 ## 2. Project Objectives
 
-The main objectives are:
+Our group researches building CNN models such as simple CNN, complex CNN, and transfer learning (fine-tune) to classify real images and AI-generated images. These models will learn image features from the training data to classify images into two groups: Real images and AI-generated images.
 
--
--
--
 
 ## 3. Dataset
 
