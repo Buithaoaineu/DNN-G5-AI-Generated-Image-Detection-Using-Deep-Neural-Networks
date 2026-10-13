@@ -1,12 +1,13 @@
 import pandas as pd
 import tensorflow as tf
+import sys
+sys.path.append("..")
 from src.data.preprocess import preprocess_image
-
 # Tải model đã huấn luyện
 models = {
-    "Simple CNN": "src/models/simple_cnn.keras",
-    "Complex CNN": "src/models/complex_cnn.keras",
-    "Fine Tuning": "src/models/fine_tuning.keras"
+    "Simple CNN": "models/simple_cnn.keras",
+    "Complex CNN": "models/complex_cnn.keras",
+    "Fine Tuning": "models/fine_tuning.keras"
 }
 
 # Đọc dữ liệu test
